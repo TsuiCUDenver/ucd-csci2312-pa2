@@ -3,8 +3,8 @@
 
 #include "Point.h"
 
-namespace Clustering {
 
+namespace Clustering {
     typedef struct LNode *LNodePtr;
 
     struct LNode {
@@ -20,9 +20,9 @@ namespace Clustering {
         int __size;
         LNodePtr __points;
 
-        void __del();
-        void __cpy(LNodePtr pts);
-        bool __in(const Point &p) const;
+        // void __del();
+        // void __cpy(LNodePtr pts);
+        // bool __in(const Point &p) const;
 
 
     public:
@@ -34,7 +34,7 @@ namespace Clustering {
         ~Cluster();
 
         // Getters/setters
-        int getSize() const; // TODO add to the requirements
+        int getSize() const{ return __size;} // TODO add to the requirements
 
         // Set functions: They allow calling c1.add(c2.remove(p));
         void add(const Point &); // TODO add asc order to the requirements

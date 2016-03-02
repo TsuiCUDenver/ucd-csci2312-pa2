@@ -11,9 +11,11 @@
 #include "ClusteringTests.h"
 #include "Point.h"
 #include "Cluster.h"
+#include <limits>
 
 using namespace Clustering;
 using namespace Testing;
+using namespace std;
 
 #define DESC(x) desc(x, __LINE__)  // ugly hack, but saves some time
 
