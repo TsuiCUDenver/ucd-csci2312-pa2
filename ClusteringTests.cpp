@@ -7,15 +7,14 @@
 #include <cassert>
 #include <iomanip>
 #include <fstream>
+#include <limits>
 
 #include "ClusteringTests.h"
 #include "Point.h"
 #include "Cluster.h"
-#include <limits>
 
 using namespace Clustering;
 using namespace Testing;
-using namespace std;
 
 #define DESC(x) desc(x, __LINE__)  // ugly hack, but saves some time
 
@@ -142,8 +141,8 @@ void test_point_getsetelem(ErrorContext &ec, unsigned int numRuns) {
             pass = true;
             for (int i = 0; i < 50; i ++) {
                 pass = pass &&
-                        (p.getValue(i) == 0.0) &&
-                        (p[i] == 0.0);
+                       (p.getValue(i) == 0.0) &&
+                       (p[i] == 0.0);
             }
             ec.result(pass);
         }
@@ -161,8 +160,8 @@ void test_point_getsetelem(ErrorContext &ec, unsigned int numRuns) {
             pass = true;
             for (int i = 0; i < 20; i ++)
                 pass = pass &&
-                        (p.getValue(i) == (13.43 * i * i + 4.567 * i + 1.234567)) &&
-                        (p[i] == (13.43 * i * i + 4.567 * i + 1.234567));
+                       (p.getValue(i) == (13.43 * i * i + 4.567 * i + 1.234567)) &&
+                       (p[i] == (13.43 * i * i + 4.567 * i + 1.234567));
             ec.result(pass);
         }
 
@@ -1539,37 +1538,40 @@ void test_cluster_IO(ErrorContext &ec, unsigned int numRuns) {
         {
             std::ifstream csv("points.csv");
             Cluster c;
-            while (csv.is_open() && !csv.eof()) {
+            if (csv.is_open()) {
                 csv >> c;
+                csv.close();
             }
-            csv.close();
             pass = (c.getSize() == 4);
 
             ec.result(pass);
         }
 
         ec.DESC("read, write, and read again");
+
         {
             std::ifstream csv("points.csv");
             Cluster c;
-            while (csv.is_open() && !csv.eof()) {
+            if (csv.is_open()) {
                 csv >> c;
+                csv.close();
             }
-            csv.close();
             pass = (c.getSize() == 4);
 
             // add a point
             c.add(Point(5));
+
             std::ofstream csv1("points1.csv", std::ofstream::out);
+
             csv1 << c;
             csv1.close();
 
             std::ifstream csv2("points1.csv");
             Cluster c2;
-            while (csv2.is_open() && !csv2.eof()) {
+            if (csv2.is_open()) {
                 csv2 >> c2;
+                csv2.close();
             }
-            csv2.close();
             pass = pass && (c2.getSize() == 5);
 
             ec.result(pass);

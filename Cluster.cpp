@@ -2,7 +2,9 @@
 #include <sstream>
 #include <algorithm>
 #include "Cluster.h"
+#include <iostream>
 
+using namespace std;
 using namespace Clustering;
 namespace Clustering {
 
@@ -266,23 +268,24 @@ namespace Clustering {
         }
         return os;
     }
+
     std::istream &operator>>(std::istream &input, Cluster &c1)
     {
         std::string line;
-        getline(input,line);
+        while (getline(input,line)) {
 
-        if (line.empty())
-        {
-            return input;
+            if (line.empty()) {
+                return input;
+            }
+
+            int count = std::count(line.begin(), line.end(), ',');
+            Point ptr(count + 1);
+
+            std::istringstream ss(line);
+            ss >> ptr;
+
+            c1.add(ptr);
         }
-
-        int count = std::count(line.begin(), line.end(), ',');
-        Point ptr(count + 1);
-
-        std::istringstream ss(line);
-        ss >> ptr;
-
-        c1.add(ptr);
         return input;
     }
 
