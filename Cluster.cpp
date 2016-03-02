@@ -18,11 +18,18 @@ namespace Clustering {
         __points = nullptr;
     }
 
+
+    int Clustering::Cluster::getSize() const
+    {
+        return __size;
+    }
+
     Clustering::Cluster::Cluster(const Cluster & rhs):Cluster()
     {
         for (int count = 0; count < rhs.__size; count++)
             add(rhs[count]);
     }
+
 
     Cluster &Clustering::Cluster::operator=(const Cluster &rhs)
     {

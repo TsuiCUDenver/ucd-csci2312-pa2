@@ -1,4 +1,5 @@
 #include <string>
+#include <cmath>
 #include <sstream>
 #include <algorithm>
 #include "Cluster.h"
@@ -53,6 +54,17 @@ namespace Clustering {
     {
         delete[] __values;
     }
+
+    int Point::getId() const
+    {
+        return __id;
+    }
+
+    int Point::getDims() const
+    {
+        return __dim;
+    }
+
 
     void Point::setValue(int index, double newValue)
     {

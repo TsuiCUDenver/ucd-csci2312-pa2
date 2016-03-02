@@ -34,7 +34,7 @@ namespace Clustering {
         ~Cluster();
 
         // Getters/setters
-        int getSize() const{ return __size;} // TODO add to the requirements
+        int getSize() const; // TODO add to the requirements
 
         // Set functions: They allow calling c1.add(c2.remove(p));
         void add(const Point &); // TODO add asc order to the requirements

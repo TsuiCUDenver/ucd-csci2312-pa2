@@ -22,8 +22,8 @@ namespace Clustering {
         ~Point();
 
         // Accessors & mutators
-        int getId() const{ return __id;};
-        int getDims() const {return __dim;};
+        int getId() const;
+        int getDims() const;
         void setValue(int, double);
         double getValue(int) const;
 
