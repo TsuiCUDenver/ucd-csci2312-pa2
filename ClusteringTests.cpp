@@ -1539,40 +1539,37 @@ void test_cluster_IO(ErrorContext &ec, unsigned int numRuns) {
         {
             std::ifstream csv("points.csv");
             Cluster c;
-            if (csv.is_open()) {
+            while (csv.is_open() && !csv.eof()) {
                 csv >> c;
-                csv.close();
             }
+            csv.close();
             pass = (c.getSize() == 4);
 
             ec.result(pass);
         }
 
         ec.DESC("read, write, and read again");
-
         {
             std::ifstream csv("points.csv");
             Cluster c;
-            if (csv.is_open()) {
+            while (csv.is_open() && !csv.eof()) {
                 csv >> c;
-                csv.close();
             }
+            csv.close();
             pass = (c.getSize() == 4);
 
             // add a point
             c.add(Point(5));
-
             std::ofstream csv1("points1.csv", std::ofstream::out);
-
             csv1 << c;
             csv1.close();
 
             std::ifstream csv2("points1.csv");
             Cluster c2;
-            if (csv2.is_open()) {
+            while (csv2.is_open() && !csv2.eof()) {
                 csv2 >> c2;
-                csv2.close();
             }
+            csv2.close();
             pass = pass && (c2.getSize() == 5);
 
             ec.result(pass);
